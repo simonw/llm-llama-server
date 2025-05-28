@@ -17,7 +17,13 @@ llm install llm-llama-server
 
 You'll need to be running a [llama-server](https://github.com/ggml-org/llama.cpp/blob/master/tools/server/README.md) on port 8080 to use this plugin.
 
-To access a regular model from LLM, use the `llama-server` model:
+You can `brew install llama.cpp` to obtain that binary. Then run it like this:
+```bash
+llama-server -hf unsloth/gemma-3-4b-it-GGUF:Q4_K_XL
+```
+This loads and serves the [unsloth/gemma-3-4b-it-GGUF](https://huggingface.co/unsloth/gemma-3-4b-it-GGUF) GGUF version of [Gemma 3 4B](https://ai.google.dev/gemma/docs/core) - a 3.2GB download.
+
+To access regular models from LLM, use the `llama-server` model:
 ```bash
 llm -m llama-server "say hi"
 ```
@@ -25,7 +31,14 @@ For vision models, use `llama-server-vision`:
 ```bash
 llm -m llama-server-vision describe -a path/to/image.png
 ```
-
+For models with [tools](https://llm.datasette.io/en/stable/tools.html) (which also support vision) use `llama-server-tools`:
+```bash
+llm -m llama-server-tools -T llm_time 'time?' --td
+```
+You'll need to run the `llama-server` with the `--jinja` flag in order for this to work:
+```bash
+llama-server --jinja -hf unsloth/gemma-3-4b-it-GGUF:Q4_K_XL
+```
 ## Development
 
 To set up this plugin locally, first checkout the code. Then create a new virtual environment:

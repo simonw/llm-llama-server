@@ -42,6 +42,14 @@ class AsyncLlamaServerVision(AsyncLlamaServer):
     model_id = "llama-server-vision"
 
 
+class LlamaServerTools(LlamaServer):
+    model_id = "llama-server-tools"
+
+
+class AsyncLlamaServerTools(AsyncLlamaServer):
+    model_id = "llama-server-tools"
+
+
 @llm.hookimpl
 def register_models(register):
     register(
@@ -51,4 +59,8 @@ def register_models(register):
     register(
         LlamaServerVision(vision=True),
         AsyncLlamaServerVision(vision=True),
+    )
+    register(
+        LlamaServerTools(vision=True, can_stream=False, supports_tools=True),
+        AsyncLlamaServerTools(vision=True, can_stream=False, supports_tools=True),
     )
