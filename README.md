@@ -39,6 +39,10 @@ You'll need to run the `llama-server` with the `--jinja` flag in order for this 
 ```bash
 llama-server --jinja -hf unsloth/gemma-3-4b-it-GGUF:Q4_K_XL
 ```
+Or for a slightly stronger [7.3GB model](https://huggingface.co/unsloth/gemma-3-12b-it-qat-GGUF):
+```bash
+llama-server --jinja -hf unsloth/gemma-3-12b-it-qat-GGUF:Q4_K_M
+```
 ## Development
 
 To set up this plugin locally, first checkout the code. Then create a new virtual environment:
